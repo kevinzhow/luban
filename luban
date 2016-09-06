@@ -1,0 +1,15 @@
+#!/usr/bin/env python3
+import sys
+import argparse
+# from tools import main
+
+parser = argparse.ArgumentParser(description='Process Generate args.')
+parser.add_argument('--gen', type=str, nargs='+',
+                    help='command begin generate')
+parser.add_argument('--env', type=str, nargs='+',
+                    help='define the enviroment')
+
+args = parser.parse_args()
+
+print(args)
+# print(sys.argv)
