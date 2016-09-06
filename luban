@@ -3,26 +3,49 @@ import sys
 import argparse
 import json
 import os
-# from tools import main
+from string import Template
+# from tools import blender
 
-parser = argparse.ArgumentParser(description='Process Generate args.')
-parser.add_argument('--gen', type=str, nargs='+',
-                    help='command begin generate')
-parser.add_argument('--env', type=str, nargs='+',
-                    help='define the enviroment')
+# parser = argparse.ArgumentParser(description='Process Generate args.')
+# parser.add_argument('--gen', type=str, nargs='+',
+#                     help='command begin generate')
+# parser.add_argument('--env', type=str, nargs='+',
+#                     help='define the enviroment')
 
-# Parse args
-args = parser.parse_args()
+# # Parse args
+# args = parser.parse_args()
 
-# Get the working location
-file_path = os.getcwd()
+# # Get the working location
+# file_path = os.getcwd()
 
-# Read package.json
-with open(os.path.join(file_path,'package.json')) as data_file:    
-	# parse package json
-    config_data = json.load(data_file)
+# # Read package.json
+# with open(os.path.join(file_path,'package.json')) as data_file:    
+# 	# parse package json
+#     config_data = json.load(data_file)
 
-print(args)
-print(filePath)
-print(config_data)
+# deps = config_data["deps"]
+
+# deps_list = list()
+
+# for dep in deps:
+# 	dep_name = list(dep.keys())[0]
+# 	dep_version = list(dep.values())[0]
+# 	dep_path = os.path.join(file_path,'luban_modules', dep_name)
+
+# print(args)
+# print(file_path)
+# print(config_data)
 # print(sys.argv)
+
+def getScriptPath():
+    return os.path.dirname(os.path.realpath(sys.argv[0]))
+
+def join_args(args):
+    return " ".join([str(x) for x in args])
+
+bender_path = os.path.join(getScriptPath(),'tools', 'blender', 'main.py')
+commandTemp = Template('blender --python $bender_path -- $extra_argv')
+
+command = commandTemp.substitute(bender_path=bender_path, extra_argv = join_args(sys.argv))
+print(command)
+os.system(command)
