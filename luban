@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 import sys
 import argparse
+import json
+import os
 # from tools import main
 
 parser = argparse.ArgumentParser(description='Process Generate args.')
@@ -9,7 +11,18 @@ parser.add_argument('--gen', type=str, nargs='+',
 parser.add_argument('--env', type=str, nargs='+',
                     help='define the enviroment')
 
+# Parse args
 args = parser.parse_args()
 
+# Get the working location
+file_path = os.getcwd()
+
+# Read package.json
+with open(os.path.join(file_path,'package.json')) as data_file:    
+	# parse package json
+    config_data = json.load(data_file)
+
 print(args)
+print(filePath)
+print(config_data)
 # print(sys.argv)
