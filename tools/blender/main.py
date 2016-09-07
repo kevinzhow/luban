@@ -31,16 +31,20 @@ with open(os.path.join(file_path,'package.json')) as data_file:
 deps = config_data["deps"]
 
 deps_list = list()
-
 for dep in deps:
 	dep_name = list(dep.keys())[0]
 	dep_version = list(dep.values())[0]
 	dep_path = os.path.join(file_path,'luban_modules', dep_name)
+	dep_data = dict()
+	dep_data["dep_name"] = dep_name
+	dep_data["dep_version"] = dep_version
+	dep_data["dep_path"] = dep_path
+	deps_list.append(dep_data)
 
 print(args)
 print(file_path)
 print(config_data)
-print(passed_argv)
+print(deps_list)
 
 # def importFBX():
  
