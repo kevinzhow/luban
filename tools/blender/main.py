@@ -39,12 +39,18 @@ for dep in deps:
 	dep_data["dep_name"] = dep_name
 	dep_data["dep_version"] = dep_version
 	dep_data["dep_path"] = dep_path
+	dep_data["dep_model_path"] = os.path.join(dep_path,'model.fbx')
 	deps_list.append(dep_data)
 
 print(args)
 print(file_path)
 print(config_data)
 print(deps_list)
+
+for dep_module in deps_list:
+	bpy.ops.import_scene.fbx(filepath=dep_module["dep_model_path"])
+
+bpy.ops.render.render(write_still=True)
 
 # def importFBX():
  

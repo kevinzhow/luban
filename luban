@@ -13,7 +13,8 @@ def join_args(args):
 	return " ".join([str(x) for x in args])
 
 bender_path = os.path.join(get_script_path(),'tools', 'blender', 'main.py')
-commandTemp = Template('blender --background --python $bender_path -- $extra_argv')
+# commandTemp = Template('blender --background --python $bender_path -- $extra_argv')
+commandTemp = Template('blender --python $bender_path -- $extra_argv')
 
 command = commandTemp.substitute(bender_path=bender_path, extra_argv = join_args(sys.argv))
 print(command)
